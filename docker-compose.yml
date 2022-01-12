@@ -1,0 +1,68 @@
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: ./web.dockerfile
+    environment:
+      - ENV=development
+      - NODE_PATH=/installation/node_modules
+      - API_URL=http://api:3100
+      - REDIS_HOST=redis
+      - PORT=3000
+    ports:
+      - 3000:3000
+    volumes:
+      - ./web:/web
+    links:
+      - redis
+      - api
+    command: supervisor worker.js
+
+  api:
+    build:
+      context: .
+      dockerfile: ./api.dockerfile
+    environment:
+      - ENV=development
+      - DATABASE_URL=mongodb://yay:hooray@mongo:27017/yayhooray
+      - NODE_PATH=/installation/node_modules
+      - PORT=3100
+    ports:
+      - 3100:3100
+    volumes:
+      - ./api:/api
+    links:
+      - mongo
+    command: supervisor worker.js
+
+  redis:
+    image: redis:latest
+    ports:
+      - 6379:6379
+    volumes:
+      - redis:/var/lib/redis
+    # logging:
+    #   driver: "none"
+
+  mongo:
+    build:
+      context: ./docker/mongo/
+      dockerfile: ./dockerfile
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: hooray
+      MONGO_INITDB_USERNAME: yay
+      MONGO_INITDB_PASSWORD: hooray
+      MONGO_INITDB_DATABASE: yayhooray
+    volumes:
+      - mongo:/data/db
+      - ./docker/mongo/init.sh:/docker-entrypoint-initdb.d/init.sh:ro
+    logging:
+      driver: "none"
+
+volumes:
+  mongo:
+  redis:

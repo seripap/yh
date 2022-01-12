@@ -1,0 +1,20 @@
+{
+  "name": "TeslaAPI",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app",
+    "watch": "supervisor worker.js"
+  },
+  "dependencies": {
+    "async": "0.2.9",
+    "bcrypt": "3.0.6",
+    "express": "3.1.0",
+    "levenshtein": "1.0.2",
+    "moment": "2.0.0",
+    "mongoose": "4.13.20",
+    "request": "^2.51.0",
+    "sanitizer": "~0.0.15",
+    "underscore": "1.4.4"
+  }
+}

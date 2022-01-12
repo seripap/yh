@@ -1,0 +1,96 @@
+      <div id="left-column">
+        <a href="/" id="header">New Yay</a>
+{{#user}}
+        <div class="lc-node welcome">
+          <h4>
+            Hi, <a href="/user/{{username}}">{{username}}</a>
+          </h4>
+          <a href="/user/{{username}}">
+            <img src="/avatars/{{username}}" class="main_avatar" />
+          </a>
+          <ul>
+        <li><a href="/preferences" id="preferences">Preferences</a></li>
+            <li><form action='/logout' method='POST'>
+              <input type='submit' id="logout_btn" value="logout" /></form></li>
+          </ul>
+        </div>
+        <div class="lc-node" id="messaging">
+          <ul>
+            <li class="messages">
+              <a href="/messages/inbox">{{inboxtext}}</a>
+            </li>
+            <li class="applicants {{#noapplicants}}noapplicants{{/noapplicants}}">
+              <a href="/pendingregistrations">{{applicanttext}}</a>
+            </li>
+          </ul>
+        </div>
+{{/user}}
+{{^user}}
+        <div class="lc-node login" id="login-box">
+          <h5>Not a member?</h5>
+          <p><img src="/img/pinkies/07.gif" width="14" height="14" align="absmiddle"/>
+          <a href="/register" class="white">Click to register, n00b!</a></p>
+          <p class="error"></p>
+          <form action="/login" method="post" id="login-form">
+            <div>
+              <label for="username">U:</label>
+              <input type="text" name="username" tabindex="1" id="username" />
+              <button tabindex="3" type="submit">Booya!</button>
+            </div>
+            <div>
+              <label for="password">P:</label>
+              <input type="password" name="password" tabindex="2" id="password" />
+              <a href="#" id="forgot-password">Forgot it?</a>
+            </div>
+          </form>
+        </div>
+{{/user}}
+        <div class="lc-node" id="threads">
+          <h3><a href="/">Threads</a></h3>
+          <ul id="thread-categories">
+            <li><a href="/category/Discussions">Discussions</a></li>
+            <li><a href="/category/Projects">Projects</a></li>
+            <li><a href="/category/Advice">Advice</a></li>
+            <li><a href="/category/Meaningless">Meaningless</a></li>
+          </ul>
+{{#user}}
+          <ul id="special-threads">
+            <li><a href="/">All Forums</a></li>
+            <li><a href="/category/-Meaningless">All But Meaningless</a></li>
+            <li><a href="/participated">Participated</a></li>
+            <li><a href="/favourites">Favourite</a></li>
+            <li><a href="/hidden">Hidden</a></li>
+            <li><a href="/started">Started</a></li>
+          </ul>
+{{/user}}
+          <ul id="search-title">
+            <li>
+              <strong>Search Thread Titles</strong><br/>
+              <form name="search-box" id="search-box" method="get" action="/">
+                <input type="text" value="" name="name" id="search-phrase" placeholder="Search" />
+                <input type="submit" value="Go" />
+              </form>
+            </li>
+          </ul>
+{{#user}}
+          <hr />
+          <a id="toggle-html" data-active="true">{{#view_html}}Turn off html{{/view_html}}{{^view_html}}Turn on html{{/view_html}}</a>
+{{/user}}
+         </div>
+{{#user}}
+        <div class="lc-node" id="buddy-list">
+          <h3><a href="/buddies">Buddies</a>
+          <a href="/users" class="users-link">(All users)</a></h3>
+
+
+          <p>ONLINE BUDDIES ({{numonlinebuddies}}/{{numtotalbuddies}})</p>
+          <div>
+{{#onlinebuddies}}
+            <span><a href="/user/{{urlname}}">{{username}}</a>,</span>
+{{/onlinebuddies}}
+          </div>
+        </div>
+{{/user}}
+        <a href="http://patrickobrienfoundation.org/" id="pobf"><img src="/img/pobf.gif" /></a>
+
+     </div>

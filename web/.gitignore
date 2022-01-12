@@ -1,0 +1,10 @@
+# Folders
+.DS_Store
+node_modules
+results-*
+current.json
+history.txt
+public/img/userimages/*
+public/avatars
+public/titles/current.json
+public/titles/history.txt

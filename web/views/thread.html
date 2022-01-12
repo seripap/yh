@@ -1,0 +1,267 @@
+{{>head}}
+<body class="yh_thread yh_{{id}}" >
+
+  <a name="top"></a>
+
+  <div id="wrapper">
+    <div id="middle">
+
+{{>leftcolumn}}
+
+      <div id="right-column">
+
+        <div id="thread">
+          <div id="main-title">
+            <h3>{{title}}</h3>
+            {{#user}}
+              <a class="favourite{{#favourite}} added{{/favourite}}" href="{{^favourite}}/thread/{{urlname}}/favourite{{/favourite}}{{#favourite}}/thread/{{urlname}}/unfavourite{{/favourite}}" data-id="{{id}}"></a>
+              <a class="hide-thread" href="/thread/{{urlname}}/{{#ishidden}}unhide{{/ishidden}}{{^ishidden}}hide{{/ishidden}}" data-id="{{id}}"></a>
+            {{/user}}
+          </div>
+
+          
+          <div class="pagination top">
+            <div class="main-pagination">
+              {{#pages}}
+              {{#separator}}
+              <span class="ellipsis">...</span>
+              {{/separator}}
+              {{^separator}}
+                {{#active}}
+              <div class="selected-page">{{num}}</div>
+                {{/active}}
+                {{^active}}
+              <a href="/thread/{{threadurlname}}{{url}}">{{num}}</a>
+                {{/active}}
+              {{/separator}}
+              {{/pages}}
+            </div>
+            <span class="paging-text">
+              {{paginationtext}}
+              in <a href="/">Threads</a> &gt;
+              <a href="/category/{{firstcategory}}">{{firstcategory}}</a> &gt;
+              <a href="/thread/{{threadurlname}}">{{title}}</a>
+            </span>
+          </div>
+
+{{#comments}}
+{{#dayslaterbanner}}
+          <div class="comment later-comment">
+            <div class="comment-container">{{dayslater}} days later</div>
+          </div>
+{{/dayslaterbanner}}
+{{^removed}}
+{{#ignored}}
+          <div id="ignore-for-{{id}}" class="ignore-container" onclick="$('#comment-container-{{id}}').toggle();"></div>
+{{/ignored}}
+          <div id="comment-{{id}}" class="comment {{#buddy}}buddy{{/buddy}} {{#ignored}}enemy{{/ignored}} {{#worths}}comment-worths{{/worths}}">
+            <div id="comment-container-{{id}}" class="comment-container">
+              <div class="cmd-bar">
+                <span>
+                  <a class="view-source" onclick="thread.view_source('{{id}}'); return false;">{{toggleSourceLabel}}</a>
+                </span>
+                <a class="quote" onclick="thread.quote('{{id}}');">Quote</a>
+              </div>
+              <div class="user-block">
+                <div class="username {{#buddy}}buddy{{/buddy}}">
+                  <a href="/user/{{postedby}}">{{postedby}}</a>
+                </div>
+                <div class="time">{{createdago}}</div>
+                <div class="user-information" style="background-image: url(/avatars/{{avatarurl}});">
+                  <ul>
+{{#user}}
+  {{#buddy}}
+                    <li><a href="/buddies/{{postedby}}">Your buddy!</a></li>
+  {{/buddy}}
+  {{^buddy}}
+                    <li><a href="/buddies/{{postedby}}">Buddy? Ignore?</a></li>
+  {{/buddy}}
+                    <li><a href="/message/send/{{postedby}}">SEND A MESSAGE</a></li>
+{{/user}}
+{{^user}}
+                    <li>&nbsp;</li>
+                    <li>&nbsp;</li>
+{{/user}}
+                  </ul>
+                </div>
+                <div class="comment-points">
+                  <span class="current-points">{{#haspoints}}{{points}} point{{#hasmultiplepoints}}s{{/hasmultiplepoints}}{{/haspoints}}</span>
+{{#canpoint}}
+                  <a class="give-point" data-commentid="{{id}}" data-type="plus">+1</a>
+{{/canpoint}}
+                </div>
+{{#showthreadcontrols}}
+                <div id="thread-control">
+                  <p>THREAD ADMIN</p>
+                  <ul>
+{{#nsfw}}
+                    <li id="control-sfw">· <span>Unmark Naughty</span></li>
+{{/nsfw}}
+{{^nsfw}}
+                    <li id="control-nsfw">· <span>Mark Naughty</span></li>
+{{/nsfw}}
+{{#closed}}
+                    <li id="control-open">· <span>Open Thread</span></li>
+{{/closed}}
+{{^closed}}
+                    <li id="control-closed">· <span>Close Thread</span></li>
+{{/closed}}
+                  </ul>
+                </div>
+{{/showthreadcontrols}}
+              </div>
+
+              <div class="content-block">
+{{#banned}}
+               <div class="censor">user has been banned, click here to see original content
+{{/banned}}
+                <div class="content">
+{{#viewhtml}}
+                  {{{content}}}
+{{/viewhtml}}
+{{^viewhtml}}
+                  {{content}}
+{{/viewhtml}}
+{{#editPercent}}
+                  <div class="edited-percent">Edited {{editPercent}}%</div>
+{{/editPercent}}
+                </div>
+{{#banned}}
+               </div>
+{{/banned}}
+              </div>
+              <div style="clear: both;"></div>
+            </div>
+          </div>
+{{/removed}}
+{{/comments}}
+
+          <div class="pagination bottom">
+            <div class="main-pagination">
+              {{#pages}}
+              {{#separator}}
+              <span class="ellipsis">...</span>
+              {{/separator}}
+              {{^separator}}
+                {{#active}}
+              <div class="selected-page">{{num}}</div>
+                {{/active}}
+                {{^active}}
+              <a href="/thread/{{threadurlname}}{{url}}">{{num}}</a>
+                {{/active}}
+              {{/separator}}
+              {{/pages}}
+            </div>
+            <span class="paging-text">
+              {{paginationtext}}
+              in <a href="/">Threads</a> &gt;
+              <a href="/category/{{firstcategory}}">{{firstcategory}}</a> &gt;
+              <a href="/thread/{{threadurlname}}">{{title}}</a>
+            </span>
+
+          </div>
+
+        <div class="dotted-bar replypad"></div>
+
+      </div>
+
+{{#user}}
+{{^authedusercanpost}}
+      <h3>You cannot post in this thread</h3>
+      <input type="hidden" name="threadurlname" value="{{threadurlname}}">
+{{/authedusercanpost}}
+{{#authedusercanpost}}
+{{#closed}}
+      <h3>This thread is closed</h3>
+      <input type="hidden" name="threadurlname" value="{{threadurlname}}">
+{{/closed}}
+{{^closed}}
+      <div id="reply-lc">
+        <h4>Post A Reply</h4>
+        <div id="post-shortcuts">
+          <p>SHORTCUTS!</p>
+          <ul>
+            <li>&middot; <a href="javascript:insertAtCaret('thread-content-input', '<a href=%22%22></a>')">URL</a></li>
+            <li>&middot; <a href="javascript:insertAtCaret('thread-content-input', '<img src=%22%22 />')">Image</a></li>
+            <li>&middot; <a href="javascript:insertAtCaret('thread-content-input', '<spoiler></spoiler>')">Spoiler</a></li>
+            <li>&middot; <a href="javascript:insertAtCaret('thread-content-input', '<code></code>')">Code</a></li>
+            <li>&middot; <a href="javascript:insertAtCaret('thread-content-input', '<small>snigger</small>')">Snigger</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div id="reply-rc">
+        <div id="pinkies">
+          <a href="javascript:insertAtCaret('thread-content-input', '[:)]');"><img src="/img/pinkies/11.gif" /></a>
+          <a href="javascript:insertAtCaret('thread-content-input', '[:(]');"><img src="/img/pinkies/01.gif" /></a>
+          <a href="javascript:insertAtCaret('thread-content-input', '[:D]');"><img src="/img/pinkies/05.gif" /></a>
+          <a href="javascript:insertAtCaret('thread-content-input', '[;)]');"><img src="/img/pinkies/07.gif" /></a>
+          <a href="javascript:insertAtCaret('thread-content-input', '[:P]');"><img src="/img/pinkies/08.gif" /></a>
+          <a href="javascript:insertAtCaret('thread-content-input', '[>|]');"><img src="/img/pinkies/14.gif" /></a>
+          <a href="javascript:insertAtCaret('thread-content-input', '[:[]');"><img src="/img/pinkies/10.gif" /></a>
+          <a href="javascript:insertAtCaret('thread-content-input', '[\'(]');"><img src="/img/pinkies/03.gif" /></a>
+          <a href="javascript:insertAtCaret('thread-content-input', '[:*]');"><img src="/img/pinkies/17.gif" /></a>
+          <a href="javascript:insertAtCaret('thread-content-input', '[B-]');"><img src="/img/pinkies/16.gif" /></a>
+          <a href="javascript:insertAtCaret('thread-content-input', '[:=]');"><img src="/img/pinkies/27.gif" /></a>
+          <a href="javascript:insertAtCaret('thread-content-input', '[:.]');"><img src="/img/pinkies/22.gif" /></a>
+          <a href="javascript:insertAtCaret('thread-content-input', '[O]');"><img src="/img/pinkies/24.gif" /></a>
+          <a href="javascript:insertAtCaret('thread-content-input', '[8)]');"><img src="/img/pinkies/09.gif" /></a>
+          <a href="javascript:insertAtCaret('thread-content-input', '[:{]');"><img src="/img/pinkies/06.gif" /></a>
+          <a href="javascript:insertAtCaret('thread-content-input', '[:@]');"><img src="/img/pinkies/20.gif" /></a>
+          <a href="javascript:insertAtCaret('thread-content-input', '[%(]');"><img src="/img/pinkies/18.gif" /></a>
+          <a href="javascript:insertAtCaret('thread-content-input', '[><]');"><img src="/img/pinkies/25.gif" /></a>
+          <a href="javascript:insertAtCaret('thread-content-input', '[RR]');"><img src="/img/pinkies/23.gif" /></a>
+          <a href="javascript:insertAtCaret('thread-content-input', '[NH]');"><img src="/img/pinkies/26.gif" /></a>
+          <a href="javascript:insertAtCaret('thread-content-input', '[fbm]');"><img src="/img/pinkies/21.gif" /></a>
+        </div>
+
+        <form method="post" action="/thread/{{threadurlname}}" id="comment-form">
+          <input type="hidden" name="redirect" value="1">
+          <div class="input textarea">
+            <input type="hidden" name="threadid" value="{{id}}">
+            <input type="hidden" name="threadurlname" value="{{threadurlname}}">
+            <textarea name="content" cols="90" rows="12" tabindex="1" id="thread-content-input" ></textarea>
+          </div>
+          <p>I, {{username}}, do solemnly swear that in posting this comment I promise to be nice.</p>
+          <button type="submit" id="submit-button" tabindex="2">Agree &amp; Post</button>
+          <button type="button" id="preview-button" tabindex="3">Preview</button>
+{{#errorMessage}}
+          <p class="error">{{errorMessage}}</p>
+{{/errorMessage}}
+        </form>
+      </div>
+
+      <div id="comment-preview" class="test-comment" style="display: none;">
+        <div class="comment-container">
+          <div class="user-block">
+            <div class="username">You!</div>
+            <div class="time">Seconds from now</div>
+
+            <div class="user-information" style="background: url(/img/noavatar.gif);">
+            <ul>
+              <li>&nbsp;</li>
+              <li>&nbsp;</li>
+            </ul>
+          </div>
+        </div>
+        <div class="content-block">
+          <div class="content"></div>
+        </div>
+        <div style="clear: both;"></div>
+      </div>
+    </div>
+{{/closed}}
+{{/authedusercanpost}}
+{{/user}}
+
+    <div id="notifications">
+      <a id="closenotify"></a>
+    </div>
+  </div>
+</div>
+
+</div>
+
+</div>
+<script src="/js/autolinker.js"></script>
+{{>footer}}

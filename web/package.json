@@ -1,0 +1,43 @@
+{
+  "name": "YayHooray-TE",
+  "version": "0.0.1",
+  "private": true,
+  "engines": {
+    "node": "0.10.33"
+  },
+  "scripts": {
+    "start": "node app",
+    "watch": "supervisor worker"
+  },
+  "dependencies": {
+    "argsparser": "0.0.6",
+    "async": "0.2.9",
+    "bcrypt": "3.0.6",
+    "connect-redis": "~1.4.7",
+    "crypto": "0.0.3",
+    "ent": "0.1.0",
+    "expectations": "~0.1.0",
+    "express": "3.1.0",
+    "hogan-express": "0.3.3",
+    "http-proxy": "0.10.3",
+    "moment": "2.0.0",
+    "mongoose": "3.6.19",
+    "process": "0.5.1",
+    "redis": "~0.10.1",
+    "request": "2.16.6",
+    "restler": "2.0.1",
+    "sanitizer": "~0.0.15",
+    "sinon": "~1.7.2",
+    "socket.io": "0.9.14",
+    "underscore": "1.4.4",
+    "urlencode": "0.2.0",
+    "validator": "1.5.1",
+    "winston": "0.7.2"
+  },
+  "devDependencies": {
+    "gulp": "^3.8.10",
+    "gulp-concat": "^2.4.3",
+    "gulp-minify-css": "^0.3.11",
+    "gulp-uglify": "^1.0.2"
+  }
+}

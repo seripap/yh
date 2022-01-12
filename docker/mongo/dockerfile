@@ -1,0 +1,5 @@
+FROM mongo:latest
+
+# https://github.com/docker-library/mongo/issues/323
+RUN mkdir -p /home/mongodb && touch ./home/mongodb/.dbshell
+RUN chown -R 999:999 /home/mongodb
