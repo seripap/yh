@@ -12,16 +12,6 @@
         <div id="main-title"><h3>{{profilename}}</h3></div>
         <div id="user">
 
-{{#flickr}}
-          <div id="photostream">From Flickr:
-            <div id="flickr_badge_uber_wrapper">
-              <div id="flickr_badge_wrapper">
-                <script type="text/javascript" src="http://www.flickr.com/badge_code_v2.gne?count=10&display=latest&size=s&layout=x&source=user&user={{flickr}}"></script>
-              </div>
-            </div>
-          </div>
-{{/flickr}}
-
           <div class="personal_info_box">
             <div id="information" class="standard_profile_info_box">
               <h3>{{profilename}}</h3>
@@ -71,23 +61,11 @@
 {{#website3}}
               <span class='small_profile_caps'>URL 3: <a href="{{website3}}">{{website3}}</a></span><br/>
 {{/website3}}
-{{#aim}}
-              <span class='small_profile_caps'>AIM: <a href="{{aim}}">{{aim}}</a></span><br/>
-{{/aim}}
-{{#gchat}}
-              <span class='small_profile_caps'>GChat: <a href="{{gchat}}">{{gchat}}</a></span><br/>
-{{/gchat}}
-{{#msn}}
-              <span class='small_profile_caps'>MSN: <a href="{{msn}}">{{msn}}</a></span><br/>
-{{/msn}}
 
               <div id="social_icons">
 {{#facebook}}
                 <a href="http://www.facebook.com/{{facebook}}"><img src="/img/social_icons/facebook-icon.png" alt="Facebook." class="info_icon" /></a>
 {{/facebook}}
-{{#flickr}}
-                <a href="http://www.flickr.com/photos/{{flickr}}"><img src="/img/social_icons/flickr-icon.png" alt="Flickr." class="info_icon" /></a>
-{{/flickr}}
 {{#lastfm}}
                 <a href="http://www.last.fm/user/{{lastfm}}"><img src="/img/social_icons/lastfm-icon.png" alt="LastFM." class="info_icon" /></a>
 {{/lastfm}}
@@ -140,12 +118,12 @@
             </div>
 {{/comments}}
           </div>
-      
+
         </div>
-        
+
       </div>
-      
+
     </div>
-    
+
   </div>
 {{>footer}}
