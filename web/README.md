@@ -1,17 +1,16 @@
-TeslaYay
-========
+# TeslaYay
 
 Tesla Yayhooray app, runs on top of TeslaAPI https://github.com/cham/TeslaAPI
 
-
 ## Requirements
 
-* [Node.JS](http://nodejs.org/)
-* [Redis](http://redis.io/)
-* [TeslaAPI](https://github.com/cham/TeslaAPI)
-* [Xcode Command Line Tools - Mac only](https://developer.apple.com/xcode/)
+- [Node.JS](http://nodejs.org/)
+- [Redis](http://redis.io/)
+- [TeslaAPI](https://github.com/cham/TeslaAPI)
+- [Xcode Command Line Tools - Mac only](https://developer.apple.com/xcode/)
 
 ## Getting started
+
 1. clone the repo
 2. start redis
 3. start TeslaAPI
@@ -21,8 +20,8 @@ Tesla Yayhooray app, runs on top of TeslaAPI https://github.com/cham/TeslaAPI
 
 Yay is now running on port 3000.
 
-
 ## Editing Javascript / Stylesheets
+
 Javascript and stylesheets are concatenated and minified from `gulpfile.js`.
 
 To watch the files for changes, and recompile when changed run `gulp`:
